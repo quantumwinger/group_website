@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRG@KSU Workstations</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="workstations.css">
+    <link rel="icon" href="logo.png" type="image/png">
+</head>
+
+<body>
+    <!-- Access Control Modal -->
+    <div id="login-modal" class="modal-overlay active">
+        <div class="modal-content glass-card">
+            <h2 class="modal-title">Authorized Access Only</h2>
+            <p class="modal-subtitle">Dasgupta Research Group Workstations</p>
+            <div class="form-group">
+                <label for="username">Your Name</label>
+                <input type="text" id="username" class="modal-input" placeholder="e.g. Saswata" required>
+            </div>
+            <div class="form-group">
+                <label for="passcode">Group Passcode</label>
+                <input type="password" id="passcode" class="modal-input" required>
+            </div>
+            <button id="login-btn" class="btn btn-primary full-width">Enter Dashboard</button>
+            <p id="login-error" class="error-text" style="display: none;">Incorrect passcode or missing name.</p>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard" class="dashboard-container" style="display: none;">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <h1 class="page-title"><span class="title-accent">DRG@KSU</span> Workstations</h1>
+                <div class="user-info">
+                    <span>Welcome, <strong id="display-name"></strong></span>
+                    <button id="logout-btn" class="btn btn-secondary small-btn">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="action-bar section-container">
+            <button id="new-booking-btn" class="btn btn-primary">+ New Booking</button>
+            <div id="sync-status" class="sync-status">
+                <span class="status-indicator"></span>
+                <span class="status-text">Using Local Storage (Not Synced)</span>
+            </div>
+        </div>
+
+        <main class="workstations-grid section-container slide-up">
+            <!-- Workstation 1 -->
+            <div class="workstation-card card">
+                <div class="ws-header">
+                    <h2 class="card-title">Workstation 1</h2>
+                    <span class="status-badge" id="ws1-status">Loading...</span>
+                </div>
+                <div class="bookings-list" id="ws1-bookings">
+                    <!-- Bookings injected by JS -->
+                </div>
+            </div>
+
+            <!-- Workstation 2 -->
+            <div class="workstation-card card">
+                <div class="ws-header">
+                    <h2 class="card-title">Workstation 2</h2>
+                    <span class="status-badge" id="ws2-status">Loading...</span>
+                </div>
+                <div class="bookings-list" id="ws2-bookings">
+                </div>
+            </div>
+
+            <!-- Workstation 3 -->
+            <div class="workstation-card card">
+                <div class="ws-header">
+                    <h2 class="card-title">Workstation 3</h2>
+                    <span class="status-badge" id="ws3-status">Loading...</span>
+                </div>
+                <div class="bookings-list" id="ws3-bookings">
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="booking-modal" class="modal-overlay">
+        <div class="modal-content glass-card">
+            <div class="modal-header">
+                <h2 class="modal-title">Reserve Workstation</h2>
+                <button id="close-booking" class="close-btn">&times;</button>
+            </div>
+
+            <form id="booking-form">
+                <div class="form-group">
+                    <label for="workstation-select">Workstation</label>
+                    <select id="workstation-select" class="modal-input" required>
+                        <option value="1">Workstation 1</option>
+                        <option value="2">Workstation 2</option>
+                        <option value="3">Workstation 3</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="start-time">Start Time</label>
+                    <input type="datetime-local" id="start-time" class="modal-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="duration">Duration (hours)</label>
+                    <input type="number" id="duration" class="modal-input" min="0.5" max="24" step="0.5" value="1"
+                        required>
+                </div>
+                <button type="submit" class="btn btn-primary full-width" id="submit-booking-btn">Confirm
+                    Booking</button>
+                <p id="booking-error" class="error-text" style="display: none;"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cancel Booking Modal -->
+    <div id="cancel-modal" class="modal-overlay">
+        <div class="modal-content glass-card" style="text-align: center;">
+            <h2 class="modal-title" style="color: var(--accent-primary);">Cancel Booking</h2>
+            <p class="modal-subtitle">Are you sure you want to cancel this booking?</p>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button id="cancel-no-btn" class="btn btn-secondary full-width" style="margin-top: 0;">No, Keep It</button>
+                <button id="cancel-yes-btn" class="btn btn-primary full-width" style="margin-top: 0;">Yes, Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="workstations.js"></script>
+</body>
+
+</html>
