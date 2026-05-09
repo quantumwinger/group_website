@@ -5,6 +5,7 @@ const GROUP_PASSCODE = "dasgupta";
 const USE_GOOGLE_SHEETS = true;
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyHe_g6QmJh7q5yzliptlZX9kdeSn2G0voeN4nxhirRZbY9sXWWvpG70nV5-wBFusgE/exec";
 
+
 // --- STATE & UTILS ---
 let bookingsCache = [];
 let currentUser = "";
@@ -99,6 +100,8 @@ class BookingManager {
         } else {
             localStorage.setItem('workstation-bookings', JSON.stringify(bookingsCache));
         }
+
+
 
         renderDashboard();
     }
