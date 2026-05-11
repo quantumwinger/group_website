@@ -1,5 +1,5 @@
 // --- CONFIGURATION ---
-const GROUP_PASSCODE = "dasgupta";
+const GROUP_PASSCODE = "drg@ksu";
 const WORKSTATIONS = ["CHM-CB-212-L1", "CHM-CB-212-L2", "CHM-CB-212-L3"];
 
 // To use Google Sheets for device synchronization, set this to true and follow instructions in google_apps_script_setup.md
