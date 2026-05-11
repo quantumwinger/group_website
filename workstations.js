@@ -1,5 +1,6 @@
 // --- CONFIGURATION ---
 const GROUP_PASSCODE = "dasgupta";
+const WORKSTATIONS = ["CHM-CB-212-L1", "CHM-CB-212-L2", "CHM-CB-212-L3"];
 
 // To use Google Sheets for device synchronization, set this to true and follow instructions in google_apps_script_setup.md
 const USE_GOOGLE_SHEETS = true;
@@ -290,8 +291,13 @@ function renderDashboard() {
     // Sort ascending by time
     bookingsCache.sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
 
-    [1, 2, 3].forEach(wsId => {
-        const wsBookings = bookingsCache.filter(b => parseInt(b.workstation) === wsId);
+    WORKSTATIONS.forEach((wsName, index) => {
+        const wsId = index + 1;
+        // Filter by name OR by legacy ID ("1", "2", "3")
+        const wsBookings = bookingsCache.filter(b => 
+            b.workstation === wsName || b.workstation == wsId.toString()
+        );
+        
         const container = document.getElementById(`ws${wsId}-bookings`);
         const statusBadge = document.getElementById(`ws${wsId}-status`);
 
