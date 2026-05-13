@@ -186,4 +186,4 @@ if st.session_state.running:
     st.rerun()
 
 st.markdown("---")
-st.markdown("<p style='text-align: center; color: gray;'>Copyright dasgupta research group @K-State <a href='https://www.drgatksu.com' target='_blank' style='color: gray; text-decoration: underline;'>www.drgatksu.com</a></p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: gray;'>© Dasgupta Research Group @ K-State <a href='https://www.drgatksu.com' target='_blank' style='color: gray; text-decoration: underline;'>www.drgatksu.com</a></p>", unsafe_allow_html=True)
