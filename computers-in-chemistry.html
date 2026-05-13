@@ -44,10 +44,9 @@
 
     <main class="page-padding">
         <section class="section-container slide-up">
-            <h1 class="page-title">Computers in Chemistry</h1>
-            <p class="subtitle-text">Interactive molecular simulations for science outreach</p>
+            <h1 class="page-title">Chemistry with Computers</h1>
             <p class="intro-text">
-                Explore how computers help chemists understand molecules, reactions, and materials. These interactive games let students change molecular parameters and see how chemistry responds in real time.
+                Explore how computers help chemists understand molecules, reactions, and materials. These interactive games let users change molecular parameters and see how chemistry responds in real time.
             </p>
 
             <div id="games-grid" class="games-grid">
@@ -81,34 +80,34 @@
         document.addEventListener('DOMContentLoaded', () => {
             const gamesData = [
                 {
-                    title: "Make a Droplet",
-                    description: "Tune molecular attraction and temperature to watch gas-like particles form a liquid droplet.",
+                    title: "Make a Crystal",
+                    description: "Tune molecular attraction and temperature to watch disordered liquid particles freeze into a solid crystal.",
                     filename: "nucleation.py",
-                    url: "outreach_games/nucleation.py"
+                    url: "https://quantumwingerapp.streamlit.app/nucleation"
                 },
                 {
                     title: "Break the Ion Pair",
-                    description: "Explore how solvent interactions can separate a cation-anion pair.",
+                    description: "Explore how solvent interactions can separate salt ions.",
                     filename: "break_ion_pair.py",
-                    url: "outreach_games/break_ion_pair.py"
+                    url: "https://quantumwingerapp.streamlit.app/break_ion_pair"
                 },
                 {
                     title: "Design a Water Filter",
                     description: "Adjust nanopore size and charge to let water pass while blocking ions.",
                     filename: "nanopore_filter.py",
-                    url: "outreach_games/nanopore_filter.py"
-                },
-                {
-                    title: "Lower the Hill",
-                    description: "See how catalysts help reactions happen by lowering the energy barrier.",
-                    filename: "catalyst_game.py",
-                    url: "outreach_games/catalyst_game.py"
+                    url: "https://quantumwingerapp.streamlit.app/nanopore_filter"
                 },
                 {
                     title: "Reaction Quest",
                     description: "Map a reaction pathway and find the lowest-energy route from reactants to products.",
                     filename: "reaction_detective.py",
-                    url: "outreach_games/reaction_detective.py"
+                    url: "https://quantumwingerapp.streamlit.app/reaction_detective"
+                },
+                {
+                    title: "Lower the Hill",
+                    description: "See how catalysts help reactions happen by lowering the energy barrier.",
+                    filename: "catalyst_game.py",
+                    url: "https://quantumwingerapp.streamlit.app/catalyst_game"
                 }
             ];
 
@@ -136,7 +135,7 @@
                 linkBtn.rel = 'noopener noreferrer';
                 linkBtn.className = 'btn btn-primary';
                 linkBtn.id = `open-game-btn-${index}`;
-                linkBtn.textContent = 'Open Game ↗';
+                linkBtn.textContent = 'Open Simulation ↗';
 
                 actionDiv.appendChild(linkBtn);
                 card.appendChild(title);
