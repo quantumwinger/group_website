@@ -10,7 +10,7 @@ theme = {
     "solid": HTML_THEME["accent_amber"], "liquid": HTML_THEME["accent"],
 }
 
-st.set_page_config(layout="wide", page_title="Make a Crystal: Freezing Game")
+st.set_page_config(layout="wide", page_title="Make a Crystal: Simulation")
 apply_html_theme()
 st.sidebar.title("Chemistry with Computers")
 st.sidebar.markdown("_Explore how a dense liquid freezes into a solid crystal lattice._")
@@ -32,10 +32,10 @@ def init_state():
     st.session_state.history_size = []
     st.session_state.history_time = []
 
-if st.session_state.get("current_game") != "nucleation" or "pos" not in st.session_state:
+if st.session_state.get("current_simulation") != "nucleation" or "pos" not in st.session_state:
     for k in list(st.session_state.keys()):
-        if k != "current_game": del st.session_state[k]
-    st.session_state.current_game = "nucleation"
+        if k != "current_simulation": del st.session_state[k]
+    st.session_state.current_simulation = "nucleation"
     init_state()
 
 def full_reset():
@@ -107,7 +107,7 @@ cluster, is_solid, adj_dense = get_largest_cluster(st.session_state.pos)
 score = len(cluster) / N * 100
 
 # ── Layout ──────────────────────────────────────────────────────────────────
-st.markdown("<h2 style='text-align:center;color:#e2e8f0'>❄️ Make a Crystal: Liquid-to-Solid Freezing Game</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align:center;color:#e2e8f0'>❄️ Make a Crystal: Liquid-to-Solid Simulation</h2>", unsafe_allow_html=True)
 col_anim, col_info = st.columns([2, 1])
 
 with col_anim:

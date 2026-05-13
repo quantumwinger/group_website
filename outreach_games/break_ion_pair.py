@@ -11,7 +11,7 @@ theme = {
     "cation": HTML_THEME["accent_red"], "anion": HTML_THEME["accent"], "solvent": HTML_THEME["muted"],
 }
 
-st.set_page_config(layout="wide", page_title="Break the Ion Pair: Salt Dissolving Game")
+st.set_page_config(layout="wide", page_title="Break the Ion Pair: Simulation")
 apply_html_theme()
 st.sidebar.title("Chemistry with Computers")
 st.sidebar.markdown("_Explore how water dissolves salt by pulling ions apart._")
@@ -45,10 +45,10 @@ def init_state():
     st.session_state.history_time = []
     st.session_state.win_frames = 0
 
-if st.session_state.get("current_game") != "break_ion_pair" or "pos" not in st.session_state:
+if st.session_state.get("current_simulation") != "break_ion_pair" or "pos" not in st.session_state:
     for k in list(st.session_state.keys()):
-        if k != "current_game": del st.session_state[k]
-    st.session_state.current_game = "break_ion_pair"
+        if k != "current_simulation": del st.session_state[k]
+    st.session_state.current_simulation = "break_ion_pair"
     init_state()
 
 def full_reset():
@@ -154,7 +154,7 @@ state_str, state_col = get_state(dist)
 avg_dist = float(np.mean(st.session_state.history_dist)) if st.session_state.history_dist else dist
 won = st.session_state.win_frames >= 15
 
-st.markdown("<h2 style='text-align:center;color:#e2e8f0'>⚗️ Break the Ion Pair: Salt Dissolving Game</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align:center;color:#e2e8f0'>⚗️ Break the Ion Pair: Simulation</h2>", unsafe_allow_html=True)
 col_anim, col_info = st.columns([2, 1])
 
 with col_anim:

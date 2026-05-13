@@ -26,10 +26,10 @@ def init_state():
     st.session_state.path_s = 0.0
 
 
-if st.session_state.get("current_game") != "reaction_detective" or "running" not in st.session_state:
+if st.session_state.get("current_simulation") != "reaction_detective" or "running" not in st.session_state:
     for k in list(st.session_state.keys()):
-        if k != "current_game": del st.session_state[k]
-    st.session_state.current_game = "reaction_detective"
+        if k != "current_simulation": del st.session_state[k]
+    st.session_state.current_simulation = "reaction_detective"
     init_state()
 
 

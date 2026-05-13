@@ -9,7 +9,7 @@ theme = {
     "reactant": HTML_THEME["accent_red"], "product": HTML_THEME["success"],
 }
 
-st.set_page_config(layout="wide", page_title="Lower the Hill: Catalyst Reaction Game")
+st.set_page_config(layout="wide", page_title="Lower the Hill: Simulation")
 apply_html_theme()
 st.sidebar.title("Chemistry with Computers")
 st.sidebar.markdown("_Watch how a catalyst lowers the activation energy of a reaction._")
@@ -28,10 +28,10 @@ def init_state():
     st.session_state.running = False; st.session_state.time_step = 0
     st.session_state.history_products = []; st.session_state.history_time = []
 
-if st.session_state.get("current_game") != "catalyst" or "x" not in st.session_state:
+if st.session_state.get("current_simulation") != "catalyst" or "x" not in st.session_state:
     for k in list(st.session_state.keys()):
-        if k != "current_game": del st.session_state[k]
-    st.session_state.current_game = "catalyst"
+        if k != "current_simulation": del st.session_state[k]
+    st.session_state.current_simulation = "catalyst"
     init_state()
 
 def full_reset():
@@ -77,7 +77,7 @@ products = int(np.sum(st.session_state.x > 0))
 pct      = products / N * 100
 
 # ── Layout ───────────────────────────────────────────────────────────────────
-st.markdown("<h2 style='text-align:center;color:#e2e8f0'>⚗️ Lower the Hill: Catalyst Reaction Game</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align:center;color:#e2e8f0'>⚗️ Lower the Hill: Simulation</h2>", unsafe_allow_html=True)
 col_anim, col_info = st.columns([2, 1])
 
 with col_anim:
@@ -110,8 +110,8 @@ with col_anim:
 
 with col_info:
     st.subheader("Score & Status")
-    game_over = st.session_state.time_step >= MAX_STEPS
-    if game_over:
+    sim_over = st.session_state.time_step >= MAX_STEPS
+    if sim_over:
         if products > 80:    smsg, scol = "🏆 Fast reaction! Catalyst wins!", theme["success"]
         elif products > 30:  smsg, scol = "⚠️ Moderate – try more catalyst or heat", theme["warning"]
         else:                smsg, scol = "❌ Too slow – barrier was too high", theme["error"]
@@ -121,12 +121,12 @@ with col_info:
         else:                smsg, scol = "🚀 Fast reaction! Products forming!", theme["success"]
     st.markdown(f"<div style='background:{scol};padding:10px;border-radius:8px;color:white;"
                 f"text-align:center;font-weight:bold;font-size:1.05rem'>{smsg}</div>", unsafe_allow_html=True)
-    if game_over: st.markdown("**⏱ Game Over!**")
+    if sim_over: st.markdown("**⏱ Simulation Complete!**")
     st.markdown("<br>", unsafe_allow_html=True)
     c1, c2 = st.columns(2)
     c1.metric("Products", f"{products}")
     c2.metric("Conversion", f"{pct:.1f}%")
-    if products > 80 and game_over: st.success("Outstanding! You optimised the reaction perfectly.")
+    if products > 80 and sim_over: st.success("Outstanding! You optimised the reaction perfectly.")
     elif pct > 50:                  st.warning("More than half converted – keep going!")
     else:                           st.info("Raise catalyst strength or temperature to speed up.")
 
