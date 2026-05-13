@@ -116,7 +116,7 @@ with col_info:
         elif products > 30:  smsg, scol = "⚠️ Moderate – try more catalyst or heat", theme["warning"]
         else:                smsg, scol = "❌ Too slow – barrier was too high", theme["error"]
     else:
-        if products < 5:     smsg, scol = "⏳ Few molecules have enough energy…", theme["primary"]
+        if products < 5:     smsg, scol = "⏳ Few molecules have enough energy…", theme["dim"]
         elif products < 40:  smsg, scol = "🔥 Reaction is proceeding!", theme["warning"]
         else:                smsg, scol = "🚀 Fast reaction! Products forming!", theme["success"]
     st.markdown(f"<div style='background:{scol};padding:10px;border-radius:8px;color:white;"
@@ -144,3 +144,6 @@ with col_info:
 if st.session_state.running:
     time.sleep(0.04)
     st.rerun()
+
+st.markdown("---")
+st.markdown("<p style='text-align: center; color: gray;'>Copyright dasgupta research group @K-State <a href='https://www.drgatksu.com' target='_blank' style='color: gray; text-decoration: underline;'>www.drgatksu.com</a></p>", unsafe_allow_html=True)

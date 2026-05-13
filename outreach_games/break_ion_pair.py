@@ -185,8 +185,8 @@ with col_anim:
     # Distance label along line
     mid = (pos[0] + pos[1]) / 2
     ax.text(mid[0], mid[1]+0.4, f"d = {dist:.2f}", ha="center", fontsize=9,
-            color="#922b21", fontweight="bold", zorder=6,
-            bbox=dict(facecolor='white', alpha=0.6, boxstyle='round,pad=0.2'))
+            color=theme["primary"], fontweight="bold", zorder=6,
+            bbox=dict(facecolor=theme["card"], edgecolor=theme["card_border"], alpha=0.85, boxstyle='round,pad=0.2'))
 
     # Cation (red +)
     ax.add_patch(patches.Circle(pos[0], ION_R, facecolor=theme["cation"],
@@ -238,3 +238,6 @@ with col_info:
 if st.session_state.running:
     time.sleep(0.04)
     st.rerun()
+
+st.markdown("---")
+st.markdown("<p style='text-align: center; color: gray;'>Copyright dasgupta research group @K-State <a href='https://www.drgatksu.com' target='_blank' style='color: gray; text-decoration: underline;'>www.drgatksu.com</a></p>", unsafe_allow_html=True)

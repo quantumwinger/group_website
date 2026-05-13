@@ -273,7 +273,7 @@ ax2.text(
     fontsize=10,
     ha="left",
     va="top",
-    bbox=dict(boxstyle="round,pad=0.35", facecolor="#fdfefe", edgecolor="#d5dbdb"),
+    bbox=dict(boxstyle="round,pad=0.35", facecolor=theme["card"], edgecolor=theme["card_border"]),
 )
 
 ax2.set_xlabel("Reaction coordinate (0 = reactants, 1 = products)", fontsize=10)
@@ -291,3 +291,6 @@ if st.session_state.running:
         st.session_state.running = False
     time.sleep(0.04)
     st.rerun()
+
+st.markdown("---")
+st.markdown("<p style='text-align: center; color: gray;'>Copyright dasgupta research group @K-State <a href='https://www.drgatksu.com' target='_blank' style='color: gray; text-decoration: underline;'>www.drgatksu.com</a></p>", unsafe_allow_html=True)

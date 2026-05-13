@@ -136,7 +136,7 @@ with col_info:
     st.subheader("Score & Status")
     if score > 40:    smsg, scol = "❄️ Crystal formed! You win!", theme["success"]
     elif score > 15:  smsg, scol = "🧊 Nucleating: crystals forming…", theme["warning"]
-    else:             smsg, scol = "💧 Liquid: particles are disordered", theme["primary"]
+    else:             smsg, scol = "💧 Liquid: particles are disordered", theme["liquid"]
     st.markdown(f"<div style='background:{scol};padding:10px;border-radius:8px;color:white;"
                 f"text-align:center;font-weight:bold;font-size:1.1rem'>{smsg}</div>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
@@ -161,3 +161,6 @@ with col_info:
 if st.session_state.running:
     time.sleep(0.04)
     st.rerun()
+
+st.markdown("---")
+st.markdown("<p style='text-align: center; color: gray;'>Copyright dasgupta research group @K-State <a href='https://www.drgatksu.com' target='_blank' style='color: gray; text-decoration: underline;'>www.drgatksu.com</a></p>", unsafe_allow_html=True)
