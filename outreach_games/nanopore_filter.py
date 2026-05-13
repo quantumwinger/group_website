@@ -37,7 +37,11 @@ def init_state():
     st.session_state.passed = np.zeros(N, dtype=bool)
     st.session_state.history_water = []; st.session_state.history_time = []
 
-if "pos" not in st.session_state: init_state()
+if st.session_state.get("current_game") != "nanopore" or "pos" not in st.session_state:
+    for k in list(st.session_state.keys()):
+        if k != "current_game": del st.session_state[k]
+    st.session_state.current_game = "nanopore"
+    init_state()
 
 def full_reset():
     for k in list(st.session_state.keys()): del st.session_state[k]
@@ -51,12 +55,12 @@ with col_b2:
     if st.sidebar.button("Reset", use_container_width=True):
         full_reset(); st.rerun()
 
-with st.sidebar.expander("💡 Science Idea"):
-    st.write("Nanoporous membranes separate solutes by **size** (steric exclusion) and **charge** (electrostatic repulsion). Real desalination membranes have pores just a few nanometers wide.")
-with st.sidebar.expander("🎯 Challenge"):
-    st.write("- Set **Pore Size** so water (small) passes but ions (larger) are blocked.\n- Use **Pore Charge** to electrostatically repel ions.\n- Maximize water passed while keeping ions < 5.")
-with st.sidebar.expander("🔬 Try This"):
-    st.write("1. Pore Size = 1.0, Charge = 0.0. How many ions leak?\n2. Add Pore Charge = +1.5. Does it block positive ions?\n3. Find the smallest pore that lets > 50% water through.")
+st.sidebar.markdown("### 💡 Science Idea")
+st.sidebar.info("Nanoporous membranes separate solutes by **size** (steric exclusion) and **charge** (electrostatic repulsion). Real desalination membranes have pores just a few nanometers wide.")
+st.sidebar.markdown("### 🎯 Challenge")
+st.sidebar.success("- Set **Pore Size** so water (small) passes but ions (larger) are blocked.\n- Use **Pore Charge** to electrostatically repel ions.\n- Maximize water passed while keeping ions < 5.")
+st.sidebar.markdown("### 🔬 Try This")
+st.sidebar.warning("1. Pore Size = 1.0, Charge = 0.0. How many ions leak?\n2. Add Pore Charge = +1.5. Does it block positive ions?\n3. Find the smallest pore that lets > 50% water through.")
 
 def apply_boundaries(new_pos, old_pos):
     ml = L/2 - 0.5; mr = L/2 + 0.5

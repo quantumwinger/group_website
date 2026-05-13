@@ -32,7 +32,10 @@ def init_state():
     st.session_state.history_size = []
     st.session_state.history_time = []
 
-if "pos" not in st.session_state:
+if st.session_state.get("current_game") != "nucleation" or "pos" not in st.session_state:
+    for k in list(st.session_state.keys()):
+        if k != "current_game": del st.session_state[k]
+    st.session_state.current_game = "nucleation"
     init_state()
 
 def full_reset():
@@ -46,12 +49,12 @@ with col_b2:
     if st.sidebar.button("Reset", use_container_width=True):
         full_reset(); st.rerun()
 
-with st.sidebar.expander("💡 Science Idea"):
-    st.write("When temperature drops, molecules lose kinetic energy. If intermolecular attractions are strong enough, they lock into a structured **crystal lattice**, transitioning from a disordered liquid to a solid.")
-with st.sidebar.expander("🎯 Challenge"):
-    st.write("- Lower **Temperature** to freeze the liquid.\n- Increase **Attraction Strength** to help molecules bind.\n- Aim for **Crystal Score > 40%** to win!")
-with st.sidebar.expander("🔬 Try This"):
-    st.write("1. Set Attraction = 1.5, Temperature = 100 K. Watch bonds form!\n2. Increase Temperature to 450 K. Does the crystal melt?\n3. How large a crystal can you make by tuning both sliders?")
+st.sidebar.markdown("### 💡 Science Idea")
+st.sidebar.info("When temperature drops, molecules lose kinetic energy. If intermolecular attractions are strong enough, they lock into a structured **crystal lattice**, transitioning from a disordered liquid to a solid.")
+st.sidebar.markdown("### 🎯 Challenge")
+st.sidebar.success("- Lower **Temperature** to freeze the liquid.\n- Increase **Attraction Strength** to help molecules bind.\n- Aim for **Crystal Score > 40%** to win!")
+st.sidebar.markdown("### 🔬 Try This")
+st.sidebar.warning("1. Set Attraction = 1.5, Temperature = 100 K. Watch bonds form!\n2. Increase Temperature to 450 K. Does the crystal melt?\n3. How large a crystal can you make by tuning both sliders?")
 
 def compute_forces(pos, eps):
     diff = pos[:, np.newaxis, :] - pos[np.newaxis, :, :]

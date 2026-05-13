@@ -26,7 +26,10 @@ def init_state():
     st.session_state.path_s = 0.0
 
 
-if "running" not in st.session_state:
+if st.session_state.get("current_game") != "reaction_detective" or "running" not in st.session_state:
+    for k in list(st.session_state.keys()):
+        if k != "current_game": del st.session_state[k]
+    st.session_state.current_game = "reaction_detective"
     init_state()
 
 
@@ -40,20 +43,20 @@ st.sidebar.title("Chemistry with Computers")
 st.sidebar.markdown("_Use a reaction coordinate scan to map a molecular pathway._")
 st.sidebar.markdown("---")
 
-with st.sidebar.expander("💡 Science Idea"):
-    st.write(
+st.sidebar.markdown("### 💡 Science Idea")
+st.sidebar.info(
         "Computational chemists can study a reaction by calculating the energy at many points as the "
         "**Nu-C distance** gets shorter and the **C-Lg distance** gets longer. The full energy curve "
         "shows the reactants, the highest-energy transition-state region, and the products."
     )
-with st.sidebar.expander("🎯 Challenge"):
-    st.write(
+st.sidebar.markdown("### 🎯 Challenge")
+st.sidebar.success(
         "- Adjust the molecular setup to lower the energy barrier.\n"
         "- Watch the moving marker trace the pathway.\n"
         "- Use the energy plot to identify the transition state and reaction energy."
     )
-with st.sidebar.expander("🔬 Try This"):
-    st.write(
+st.sidebar.markdown("### 🔬 Try This")
+st.sidebar.warning(
         "1. Increase the attack angle and Nu-C bond-making strength. What happens to the barrier?\n"
         "2. Make the C-Lg bond easier to break. What changes on the energy plot?\n"
         "3. Compare a low-barrier and high-barrier pathway using the plot."

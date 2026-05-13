@@ -28,7 +28,11 @@ def init_state():
     st.session_state.running = False; st.session_state.time_step = 0
     st.session_state.history_products = []; st.session_state.history_time = []
 
-if "x" not in st.session_state: init_state()
+if st.session_state.get("current_game") != "catalyst" or "x" not in st.session_state:
+    for k in list(st.session_state.keys()):
+        if k != "current_game": del st.session_state[k]
+    st.session_state.current_game = "catalyst"
+    init_state()
 
 def full_reset():
     for k in list(st.session_state.keys()): del st.session_state[k]
@@ -42,12 +46,12 @@ with col_b2:
     if st.sidebar.button("Reset", use_container_width=True):
         full_reset(); st.rerun()
 
-with st.sidebar.expander("💡 Science Idea"):
-    st.write("A catalyst provides an **alternative pathway** with lower activation energy, letting more molecules cross the energy barrier. Temperature supplies kinetic energy to help molecules climb the hill.")
-with st.sidebar.expander("🎯 Challenge"):
-    st.write("- Increase **Catalyst Strength** to lower the barrier.\n- Raise **Temperature** for more kinetic energy.\n- Aim for **> 80 products** before the timer runs out!")
-with st.sidebar.expander("🔬 Try This"):
-    st.write("1. Catalyst = 0.6, Temperature = 150 K. What happens?\n2. Catalyst = 0.0, Temperature = 450 K. Compare reaction speed.\n3. Find the minimum catalyst + temperature combo to reach > 80 products.")
+st.sidebar.markdown("### 💡 Science Idea")
+st.sidebar.info("A catalyst provides an **alternative pathway** with lower activation energy, letting more molecules cross the energy barrier. Temperature supplies kinetic energy to help molecules climb the hill.")
+st.sidebar.markdown("### 🎯 Challenge")
+st.sidebar.success("- Increase **Catalyst Strength** to lower the barrier.\n- Raise **Temperature** for more kinetic energy.\n- Aim for **> 80 products** before the timer runs out!")
+st.sidebar.markdown("### 🔬 Try This")
+st.sidebar.warning("1. Catalyst = 0.6, Temperature = 150 K. What happens?\n2. Catalyst = 0.0, Temperature = 450 K. Compare reaction speed.\n3. Find the minimum catalyst + temperature combo to reach > 80 products.")
 
 def E_curve(x, cat):
     return 0.5*x**4 - 3*x**2 - 1.5*x + 12.0*(1.0-cat)*np.exp(-x**2)

@@ -45,7 +45,10 @@ def init_state():
     st.session_state.history_time = []
     st.session_state.win_frames = 0
 
-if "pos" not in st.session_state:
+if st.session_state.get("current_game") != "break_ion_pair" or "pos" not in st.session_state:
+    for k in list(st.session_state.keys()):
+        if k != "current_game": del st.session_state[k]
+    st.session_state.current_game = "break_ion_pair"
     init_state()
 
 def full_reset():
@@ -59,15 +62,15 @@ with col_b2:
     if st.sidebar.button("Reset", use_container_width=True):
         full_reset(); st.rerun()
 
-with st.sidebar.expander("Science Idea"):
-    st.write("Dissolving salt is a **tug-of-war** between ion-ion attraction and ion-water attraction. "
+st.sidebar.markdown("### 💡 Science Idea")
+st.sidebar.info("Dissolving salt is a **tug-of-war** between ion-ion attraction and ion-water attraction. "
              "When water molecules are strong enough, they peel ions apart one by one.")
-with st.sidebar.expander("Challenge"):
-    st.write("- Increase **Solvent Strength** to pull ions apart.\n"
+st.sidebar.markdown("### 🎯 Challenge")
+st.sidebar.success("- Increase **Solvent Strength** to pull ions apart.\n"
              "- Reduce **Ion Attraction** to make it easier.\n"
              "- Keep ions separated (distance > 3.0) to win!")
-with st.sidebar.expander("Try This"):
-    st.write("1. Set solvent strength = 0.1. Do the ions separate?\n"
+st.sidebar.markdown("### 🔬 Try This")
+st.sidebar.warning("1. Set solvent strength = 0.1. Do the ions separate?\n"
              "2. Push solvent to 1.8. How quickly does salt dissolve?\n"
              "3. With ion attraction = 3.0, what solvent strength is needed?")
 
